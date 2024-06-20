@@ -39,3 +39,4 @@ Route::get('/getProductList', [HomeController::class, 'GetProductsList']);
 Route::post('/register_product', [HomeController::class, 'RegisterProduct'])->name('register_product');
 Route::get('/product/{id}', [HomeController::class, 'GetProductDetails']);
 Route::get('/delete/{id}', [HomeController::class, 'DeleteProduct']);
+Route::post('/update/{id}', [HomeController::class, 'UpdateProduct']);

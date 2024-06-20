@@ -73,4 +73,37 @@ class HomeController extends Controller
         // Return a JSON response indicating the result
         return response()->json(['res' => $response]);
     }
+
+    public function UpdateProduct(Request $request)
+    {
+        try{
+            // Validate the request data
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+                'price' => 'required|numeric|min:0|max:9999999.99',
+            ]);
+
+            // Prepare the data for updating
+            $data = [
+                'product_name' => $request->name,
+                'product_description' => $request->description,
+                'product_price' => $request->price,
+            ];
+
+            // Update the product using the repository
+            $product = $this->productRepository->update($request->id, $data);
+
+            // Check if the product was successfully updated
+            if ($product) {
+                return response()->json(['success' => true, 'message' => 'Product updated successfully.']);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Product update failed.'], 500);
+            }
+        }catch(\Exception $e){
+            Log::error("Home Controller Error: UpdateProduct(): " . $e->getMessage());
+            return response()->json(['status_code' => 1]);
+        }
+
+    }
 }

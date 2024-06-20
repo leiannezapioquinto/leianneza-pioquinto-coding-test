@@ -61,26 +61,22 @@
                 <form id="editForm">
                     <div class="container">
                         <div class="card-body mb-0">
-                            <div class="row mt-3">
-                                <label for="name" class="form-label"><strong><span style="color: #5864dc;">Product Name</span></strong></label>
-                                <input type="text" class="form-control" id="name" name="name" maxlength="255" required oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
-                            </div>
-                            <div class="row mt-3">
-                                <label for="description" class="form-label"><strong><span style="color: #5864dc;">Product Description</span></strong></label>
-                                <input type="text" class="form-control" id="description" name="description" required oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
-                            </div>
-                            <div class="row mt-3">
-                                <label for="price" class="form-label"><strong><span style="color: #5864dc;">Product Price</span></strong></label>
-                                <input type="text" class="form-control" id="price" name="price" maxlength="25" required oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
-                            </div>
+                            <form id="editProductForm">
+                                <div class="row mt-3">
+                                    <label for="name" class="form-label"><strong><span style="color: #5864dc;">Product Name</span></strong></label>
+                                    <input type="text" class="form-control" id="name" name="name" maxlength="255" required>                            </div>
+                                <div class="row mt-3">
+                                    <label for="description" class="form-label"><strong><span style="color: #5864dc;">Product Description</span></strong></label>
+                                    <textarea class="form-control" id="description" name="description" required></textarea>
+                                </div>
+                                <div class="row mt-3">
+                                    <label for="price" class="form-label"><strong><span style="color: #5864dc;">Product Price</span></strong></label>
+                                    <input type="number" class="form-control" id="price" name="productPrice" step="0.01" min="0" max="9999999.99" required>
+                                    <div id="priceHelp" class="form-text">Please enter the price with a maximum of 2 decimal values.</div>                            </div>
+                                </div>
+                                <button id="saveBtn" type="submit" class="btn btn-primary center" disabled>Save Changes</button>
+                            </form>
                         </div>
-                    </div>
-                    <br>
-                    <!-- Save Changes Button -->
-                    <div class="text-center">
-                        <button id="saveChangesBtn" type="button" class="btn btn-primary btn-icon-text" data-bs-toggle="modal" data-bs-target="#confirmEditModal" disabled>
-                            Save Changes
-                        </button>
                     </div>
                 </form>
             </div>
@@ -172,6 +168,7 @@
 <script src="{{ asset('../js/client.scripts/ajax_retrieve_product_details.js') }}"></script>
 <script src="{{ asset('../js/client.scripts/ajax_delete_product.js') }}"></script>
 <script src="{{ asset('../js/client.scripts/ajax_register_product.js') }}"></script>
+<script src="{{ asset('../js/client.scripts/ajax_update_product.js') }}"></script>
 <script src="{{ asset('../js/client.scripts/refresh_table.js') }}"></script>
 
 <script>
