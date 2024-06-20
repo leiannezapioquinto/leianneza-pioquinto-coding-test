@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var table =
     $('#dataTable1').DataTable({
         processing: true,
         serverSide: false,
@@ -15,7 +16,8 @@ $(document).ready(function() {
                 data: null,
                 title: 'Action',
                 render: function(data, type, row) {
-                    return `<button class="btn bg-transparent edit-btn" style="border: none; padding: 0;" data-bs-toggle="modal" data-bs-target="#editModal" data-userid="${row.id}">Edit</button>`;
+                    return `<button class="btn edit-btn border border-primary text-primary" style="transition: all 0.3s;" data-bs-toggle="modal" data-bs-target="#editModal" data-userid="${row.id}">Edit</button>
+                            <button class="btn delt-btn border border-danger text-danger" style="transition: all 0.3s;" data-bs-toggle="modal" data-bs-target="#confirmModal"  data-userid="${row.id}">Delete</button>`;
                 },
                 orderable: false,
                 searchable: false
@@ -31,5 +33,9 @@ $(document).ready(function() {
                 }
             }
         }
-    });
+    });;
+
+    window.table = table; // Expose it globally
+
+
 });

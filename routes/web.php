@@ -37,3 +37,4 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/getProductList', [HomeController::class, 'GetProductsList']);
 Route::get('/product/{id}', [HomeController::class, 'GetProductDetails']);
+Route::get('/delete/{id}', [HomeController::class, 'DeleteProduct']);

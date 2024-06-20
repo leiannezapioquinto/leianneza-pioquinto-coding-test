@@ -7,10 +7,11 @@ $(document).ready(function() {
             type: 'GET',
             success: function (data) {
                 console.log("success");
-                console.log(data.productDetails[0].product_name);
-                jQuery('#name').val(data.productDetails[0].product_name).data('initial-value', data.productDetails.product_name);
-                jQuery('#description').val(data.productDetails[0].product_description).data('initial-value', data.productDetails.product_description);
-                jQuery('#price').val(data.productDetails[0].product_price).data('initial-value', data.productDetails.product_price);
+                console.log(data.productDetails);
+                console.log(data.productDetails.product_name);
+                jQuery('#name').val(data.productDetails.product_name).data('initial-value', data.productDetails.product_name);
+                jQuery('#description').val(data.productDetails.product_description).data('initial-value', data.productDetails.product_description);
+                jQuery('#price').val(data.productDetails.product_price).data('initial-value', data.productDetails.product_price);
 
                 jQuery('#editModal input, #editModal select').off('change keyup').on('change keyup', function() {
                     //();

@@ -1,5 +1,27 @@
 @extends('layouts.app')
+<style>
+.edit-btn:hover {
+    background-color: rgba(0, 0, 255, 0.1); /* Blue with 0.1 opacity */
+}
 
+/* Green */
+    .bg-success-dark {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+/* Red */
+    .bg-danger-dark {
+        background-color: #C12512;
+        color: #fff;
+    }
+
+/* Orange */
+    .bg-warning-dark {
+        background-color: #D86708;
+        color: #fff;
+    }
+</style>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -14,7 +36,7 @@
                     @endif
 
                     <div class="table-responsive container">
-                        <table id="dataTable1" class="table table-hover mb-0 display nowrap">
+                        <table id="dataTable1" class="table table-hover mb-0 display">
                             <thead></thead>
                         </table>
                     </div>
@@ -63,7 +85,58 @@
     </div>
 </div>
 
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success-dark">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+            </div>
+            <div class="modal-body" id="successModalBody">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger-dark">
+                <h5 class="modal-title" id="errorModalLabel">Error Encountered</h5>
+            </div>
+            <div class="modal-body" id="errorModalBody">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning-dark">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="confirmModalBody">
+                Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="{{ asset('../js/client.scripts/ajax_retrieve_product_list.js') }}"></script>
 <script src="{{ asset('../js/client.scripts/ajax_retrieve_product_details.js') }}"></script>
+<script src="{{ asset('../js/client.scripts/ajax_delete_product.js') }}"></script>
+<script src="{{ asset('../js/client.scripts/refresh_table.js') }}"></script>
 
 @endsection

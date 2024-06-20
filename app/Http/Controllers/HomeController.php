@@ -7,13 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\Products;
 use Yajra\DataTables\DataTables;
+use App\Repositories\ProductRepositoryInterface;
+
 
 class HomeController extends Controller
 {
     protected $user;
+    protected $productRepository;
 
-    public function __construct()
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
+        $this->productRepository = $productRepository;
         // Initialize the $user property with the authenticated user
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
@@ -33,14 +37,19 @@ class HomeController extends Controller
 
     public function GetProductsList()
     {
-        $products = Products::all();
-
+        $products = $this->productRepository->getAll();
         return DataTables::of($products)->make(true);
     }
 
     public function GetProductDetails($id)
     {
-        $productDetails = Products::getProductDetails($id);
-        return response()->json(['productDetails' => $productDetails]);
+        $product = $this->productRepository->getById($id);
+        return response()->json(['productDetails' => $product]);
+    }
+
+    public function DeleteProduct($id)
+    {
+        $response = $this->productRepository->delete($id);
+        return response()->json(['res' => $response]);
     }
 }
