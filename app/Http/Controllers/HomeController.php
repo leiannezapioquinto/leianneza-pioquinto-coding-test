@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Models\Products;
+use Yajra\DataTables\DataTables;
 
 class HomeController extends Controller
 {
@@ -27,5 +29,18 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function GetProductsList()
+    {
+        $products = Products::all();
+
+        return DataTables::of($products)->make(true);
+    }
+
+    public function GetProductDetails($id)
+    {
+        $productDetails = Products::getProductDetails($id);
+        return response()->json(['productDetails' => $productDetails]);
     }
 }
