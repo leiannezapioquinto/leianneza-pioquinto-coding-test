@@ -36,5 +36,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/getProductList', [HomeController::class, 'GetProductsList']);
+Route::post('/register_product', [HomeController::class, 'RegisterProduct'])->name('register_product');
 Route::get('/product/{id}', [HomeController::class, 'GetProductDetails']);
 Route::get('/delete/{id}', [HomeController::class, 'DeleteProduct']);

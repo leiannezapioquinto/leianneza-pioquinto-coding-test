@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Products;
 use Yajra\DataTables\DataTables;
 use App\Repositories\ProductRepositoryInterface;
+use Carbon\Carbon;
 
 
 class HomeController extends Controller
@@ -50,6 +51,26 @@ class HomeController extends Controller
     public function DeleteProduct($id)
     {
         $response = $this->productRepository->delete($id);
+        return response()->json(['res' => $response]);
+    }
+
+    public function RegisterProduct(Request $request)
+    {
+        // Retrieve data from the request
+        $name = $request->name;
+        $description = $request->description;
+        $price = $request->price;
+
+        // Create a new product using the product repository
+        $response = $this->productRepository->create([
+            'product_name' => $name,
+            'product_description' => $description,
+            'product_price' => $price,
+            'updated_at' => Carbon::now(),
+            'created_at' => Carbon::now(),
+        ]);
+
+        // Return a JSON response indicating the result
         return response()->json(['res' => $response]);
     }
 }
