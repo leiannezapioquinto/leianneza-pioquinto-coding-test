@@ -13,30 +13,28 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+// Redirect the root URL to the login page
 Route::get('/', function () {
-//     return view('welcome');
     return view('auth.login');
-});
+})->middleware('guest');
 
-
+// Show the registration page
 Route::get('/register', function () {
-//     return view('welcome');
-    return view('register')->name('register');
+    return view('register');
+})->name('register')->middleware('guest');
+
+// Authentication routes (login, register, etc.)
+Auth::routes(['register' => false]);
+
+// Protected routes that require the user to be logged in
+Route::middleware('auth')->group(function () {
+    // Home page
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    // Product routes
+    Route::get('/getProductList', [HomeController::class, 'GetProductsList'])->name('get_product_list');
+    Route::post('/register_product', [HomeController::class, 'RegisterProduct'])->name('register_product');
+    Route::get('/product/{id}', [HomeController::class, 'GetProductDetails'])->name('product_details');
+    Route::get('/delete/{id}', [HomeController::class, 'DeleteProduct'])->name('delete_product');
+    Route::post('/update/{id}', [HomeController::class, 'UpdateProduct'])->name('update_product');
 });
-
-Route::get('/dashboard', function () {
-//     return view('welcome');
-    return view('dashboard');
-});
-
-
-
-
-Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/getProductList', [HomeController::class, 'GetProductsList']);
-Route::post('/register_product', [HomeController::class, 'RegisterProduct'])->name('register_product');
-Route::get('/product/{id}', [HomeController::class, 'GetProductDetails']);
-Route::get('/delete/{id}', [HomeController::class, 'DeleteProduct']);
-Route::post('/update/{id}', [HomeController::class, 'UpdateProduct']);
