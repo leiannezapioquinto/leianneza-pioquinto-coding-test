@@ -9,7 +9,7 @@ use App\Models\Products;
 use Yajra\DataTables\DataTables;
 use App\Repositories\ProductRepositoryInterface;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -44,7 +44,14 @@ class HomeController extends Controller
 
     public function GetProductDetails($id)
     {
-        $product = $this->productRepository->getById($id);
+        // Define cache expiration time in minutes
+        $minutes = 60;
+
+        // Retrieve product details from cache or fetch from the database
+        $product = Cache::remember('product_detail_' . $id, $minutes, function () use ($id) {
+            return $this->productRepository->getById($id);
+        });
+
         return response()->json(['productDetails' => $product]);
     }
 
@@ -76,7 +83,7 @@ class HomeController extends Controller
 
     public function UpdateProduct(Request $request)
     {
-        try{
+        try {
             // Validate the request data
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -100,10 +107,9 @@ class HomeController extends Controller
             } else {
                 return response()->json(['success' => false, 'message' => 'Product update failed.'], 500);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             Log::error("Home Controller Error: UpdateProduct(): " . $e->getMessage());
             return response()->json(['status_code' => 1]);
         }
-
     }
 }

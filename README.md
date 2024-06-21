@@ -105,4 +105,14 @@ Others:
 Q: The management requested a new feature where in the fictional e-commerce app must have a "featured products" section.
 How would you go about implementing this feature in the backend?
 
-A: _Put your answer here_
+A: 
+Implementing a featured products section would entail modifications in the database, the Products API, and the MVC implementations.
+
+1. Add a column, such as flag or featured, to the products table that can have a Boolean value by creating a new migration file.
+2. Plan where to place the featured section in the user interface, which might involve re-adjusting the positions of existing elements. Additionally, add new action buttons on table rows to trigger which product should be featured or removed from the featured section.
+3. Configure the REST API:<br>
+	a. Add getter and setter functions in the ProductRepositoryInterface and implement the functionality in the ProductRepository file. <br>
+	b. Create and update controller functions to handle the featured section. <br>
+	c. Add routes for the new methods in the web.php file. <br>
+4. Connect the view to the added methods by creating new AJAX function calls to handle the requests and update the view accordingly.
+5. Test the integration of the featured section and debug accordingly.
