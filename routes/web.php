@@ -36,5 +36,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/register_product', [HomeController::class, 'RegisterProduct'])->name('register_product');
     Route::get('/product/{id}', [HomeController::class, 'GetProductDetails'])->name('product_details');
     Route::get('/delete/{id}', [HomeController::class, 'DeleteProduct'])->name('delete_product');
-    Route::post('/update/{id}', [HomeController::class, 'UpdateProduct'])->name('update_product');
+    Route::put('/update/{id}', [HomeController::class, 'UpdateProduct'])->name('update_product');
 });

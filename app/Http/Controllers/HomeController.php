@@ -86,16 +86,16 @@ class HomeController extends Controller
         try {
             // Validate the request data
             $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'required|string',
-                'price' => 'required|numeric|min:0|max:9999999.99',
+                'product_name' => 'required|string|max:255',
+                'product_description' => 'required|string',
+                'product_price' => 'required|numeric|min:0|max:9999999.99',
             ]);
 
             // Prepare the data for updating
             $data = [
-                'product_name' => $request->name,
-                'product_description' => $request->description,
-                'product_price' => $request->price,
+                'product_name' => $request->product_name,
+                'product_description' => $request->product_description,
+                'product_price' => $request->product_price,
             ];
 
             // Update the product using the repository

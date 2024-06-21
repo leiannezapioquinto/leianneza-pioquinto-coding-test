@@ -10,7 +10,7 @@ use Faker\Factory as Faker;
 
 class ProductDeletionTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
 
     protected $faker;
 

@@ -24,7 +24,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     // AJAX function to handle form submission
     jQuery(document).on('click', '#saveBtn', function () {
 
@@ -35,16 +35,16 @@ $(document).ready(function() {
 
         const data = {
             _token: csr_token,
-            name: name,
-            description: description,
-            price: price,
+            product_name: name,
+            product_description: description,
+            product_price: price,
             id: prodID,
         };
 
         // AJAX request to update product
         $.ajax({
             url: '/update/' + prodID,
-            type: 'POST',
+            type: 'PUT',
             data: data,
             success: function(response) {
                 // Handle success response

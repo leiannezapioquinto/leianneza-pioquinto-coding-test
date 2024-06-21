@@ -10,7 +10,7 @@ use Faker\Factory as Faker;
 
 class ProductDetailsFetchTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
 
     protected $faker;
 
